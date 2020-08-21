@@ -1,0 +1,50 @@
+# IMP question(VVHARD)
+def rotatektimes(arr):
+    startrow=0
+    endrow=len(arr)-1
+    startcol=0
+    endcol=len(arr[0])-1
+    temp=[]
+    result=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+    z=0
+    while(startrow<=endrow and startcol<=endcol):
+        for col in range(startcol,endcol+1):
+            temp.append(arr[startrow][col])
+        for row in range(startrow+1,endrow+1):
+            temp.append(arr[row][endcol])
+        for col in range(endcol-1,startcol-1,-1):
+            temp.append(arr[endrow][col])
+        for row in range(endrow-1,startrow,-1):
+            temp.append(arr[row][startcol])
+        n=len(temp)
+        tempend=temp[n-1]
+        while(n>0):
+            temp[n-1]=temp[n-2]
+            n-=1
+        temp[0]=tempend
+        for col in range(startcol,endcol+1):
+            result[startrow][col]=temp[z]
+            z+=1
+        for row in range(startrow+1,endrow+1):
+            result[row][endcol]=temp[z]
+            z+=1
+        for col in range(endcol-1,startcol-1,-1):
+            result[endrow][col]=temp[z]
+            z+=1
+        for row in range(endrow-1,startrow,-1):
+            result[row][startcol]=temp[z]
+            z+=1
+        startrow+=1
+        endrow-=1
+        startcol+=1
+        endcol-=1  
+        temp=[]
+        z=0
+        
+    return result
+if __name__ == '__main__':
+    arr=[[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]
+    result=rotatektimes(arr)
+    print(result)
+        
+            
